@@ -41,23 +41,23 @@ model Section {
   updatedAt       DateTime                @updatedAt
 }
 
-model Field {
-  createdAt       DateTime                 @default(now())
-  fieldType       EnumFieldFieldType
+model FieldItem {
+  createdAt       DateTime                     @default(now())
+  fieldType       EnumFieldItemFieldType
   fieldValue      String?
-  id              String                   @id @default(cuid())
+  id              String                       @id @default(cuid())
   sectionToFields SectionToField[]
   title           String
-  updatedAt       DateTime                 @updatedAt
-  validationType  EnumFieldValidationType?
+  updatedAt       DateTime                     @updatedAt
+  validationType  EnumFieldItemValidationType?
 }
 
 model SectionToField {
-  createdAt DateTime  @default(now())
-  field     Field[]
-  id        String    @id @default(cuid())
+  createdAt DateTime    @default(now())
+  field     FieldItem[]
+  id        String      @id @default(cuid())
   section   Section[]
-  updatedAt DateTime  @updatedAt
+  updatedAt DateTime    @updatedAt
 }
 
 model Cv {
@@ -82,13 +82,13 @@ enum EnumSectionSectionType {
   FiveFields
 }
 
-enum EnumFieldFieldType {
+enum EnumFieldItemFieldType {
   SingleLineText
   Number
   MultiLineText
 }
 
-enum EnumFieldValidationType {
+enum EnumFieldItemValidationType {
   Email
   Web
   Number

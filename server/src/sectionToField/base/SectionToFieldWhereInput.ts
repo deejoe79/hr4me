@@ -9,27 +9,26 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType } from "@nestjs/graphql";
+import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { FieldListRelationFilter } from "../../field/base/FieldListRelationFilter";
+import { FieldItemListRelationFilter } from "../../fieldItem/base/FieldItemListRelationFilter";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { Field } from "../../field/base/Field";
 import { StringFilter } from "../../util/StringFilter";
 import { SectionListRelationFilter } from "../../section/base/SectionListRelationFilter";
 @InputType()
 class SectionToFieldWhereInput {
   @ApiProperty({
     required: false,
-    type: () => FieldListRelationFilter,
+    type: () => FieldItemListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => FieldListRelationFilter)
+  @Type(() => FieldItemListRelationFilter)
   @IsOptional()
-  @Field(() => FieldListRelationFilter, {
+  @Field(() => FieldItemListRelationFilter, {
     nullable: true,
   })
-  field?: FieldListRelationFilter;
+  field?: FieldItemListRelationFilter;
 
   @ApiProperty({
     required: false,

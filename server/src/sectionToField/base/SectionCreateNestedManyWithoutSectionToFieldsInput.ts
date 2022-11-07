@@ -9,8 +9,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType } from "@nestjs/graphql";
-import { Field } from "../../field/base/Field";
+import { InputType, Field } from "@nestjs/graphql";
 import { SectionWhereUniqueInput } from "../../section/base/SectionWhereUniqueInput";
 import { ApiProperty } from "@nestjs/swagger";
 @InputType()

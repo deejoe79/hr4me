@@ -9,7 +9,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType } from "@nestjs/graphql";
+import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
   IsInt,
@@ -19,7 +19,6 @@ import {
   IsString,
   IsEnum,
 } from "class-validator";
-import { Field } from "../../field/base/Field";
 import { Type } from "class-transformer";
 import { Cv } from "../../cv/base/Cv";
 import { SectionToField } from "../../sectionToField/base/SectionToField";

@@ -9,7 +9,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType } from "@nestjs/graphql";
+import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
   IsInt,
@@ -18,7 +18,6 @@ import {
   IsEnum,
   IsString,
 } from "class-validator";
-import { Field } from "../../field/base/Field";
 import { CvWhereUniqueInput } from "../../cv/base/CvWhereUniqueInput";
 import { Type } from "class-transformer";
 import { SectionToFieldCreateNestedManyWithoutSectionsInput } from "./SectionToFieldCreateNestedManyWithoutSectionsInput";

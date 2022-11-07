@@ -27,9 +27,9 @@ import { SectionToFieldWhereUniqueInput } from "./SectionToFieldWhereUniqueInput
 import { SectionToFieldFindManyArgs } from "./SectionToFieldFindManyArgs";
 import { SectionToFieldUpdateInput } from "./SectionToFieldUpdateInput";
 import { SectionToField } from "./SectionToField";
-import { FieldFindManyArgs } from "../../field/base/FieldFindManyArgs";
-import { Field } from "../../field/base/Field";
-import { FieldWhereUniqueInput } from "../../field/base/FieldWhereUniqueInput";
+import { FieldItemFindManyArgs } from "../../fieldItem/base/FieldItemFindManyArgs";
+import { FieldItem } from "../../fieldItem/base/FieldItem";
+import { FieldItemWhereUniqueInput } from "../../fieldItem/base/FieldItemWhereUniqueInput";
 import { SectionFindManyArgs } from "../../section/base/SectionFindManyArgs";
 import { Section } from "../../section/base/Section";
 import { SectionWhereUniqueInput } from "../../section/base/SectionWhereUniqueInput";
@@ -181,17 +181,17 @@ export class SectionToFieldControllerBase {
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "Field",
+    resource: "FieldItem",
     action: "read",
     possession: "any",
   })
   @common.Get("/:id/field")
-  @ApiNestedQuery(FieldFindManyArgs)
+  @ApiNestedQuery(FieldItemFindManyArgs)
   async findManyField(
     @common.Req() request: Request,
     @common.Param() params: SectionToFieldWhereUniqueInput
-  ): Promise<Field[]> {
-    const query = plainToClass(FieldFindManyArgs, request.query);
+  ): Promise<FieldItem[]> {
+    const query = plainToClass(FieldItemFindManyArgs, request.query);
     const results = await this.service.findField(params.id, {
       ...query,
       select: {
@@ -220,7 +220,7 @@ export class SectionToFieldControllerBase {
   @common.Post("/:id/field")
   async connectField(
     @common.Param() params: SectionToFieldWhereUniqueInput,
-    @common.Body() body: FieldWhereUniqueInput[]
+    @common.Body() body: FieldItemWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       field: {
@@ -242,7 +242,7 @@ export class SectionToFieldControllerBase {
   @common.Patch("/:id/field")
   async updateField(
     @common.Param() params: SectionToFieldWhereUniqueInput,
-    @common.Body() body: FieldWhereUniqueInput[]
+    @common.Body() body: FieldItemWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       field: {
@@ -264,7 +264,7 @@ export class SectionToFieldControllerBase {
   @common.Delete("/:id/field")
   async disconnectField(
     @common.Param() params: SectionToFieldWhereUniqueInput,
-    @common.Body() body: FieldWhereUniqueInput[]
+    @common.Body() body: FieldItemWhereUniqueInput[]
   ): Promise<void> {
     const data = {
       field: {

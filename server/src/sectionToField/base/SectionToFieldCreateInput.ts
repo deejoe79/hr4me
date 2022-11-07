@@ -9,26 +9,25 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType } from "@nestjs/graphql";
+import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { FieldCreateNestedManyWithoutSectionToFieldsInput } from "./FieldCreateNestedManyWithoutSectionToFieldsInput";
+import { FieldItemCreateNestedManyWithoutSectionToFieldsInput } from "./FieldItemCreateNestedManyWithoutSectionToFieldsInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { Field } from "../../field/base/Field";
 import { SectionCreateNestedManyWithoutSectionToFieldsInput } from "./SectionCreateNestedManyWithoutSectionToFieldsInput";
 @InputType()
 class SectionToFieldCreateInput {
   @ApiProperty({
     required: false,
-    type: () => FieldCreateNestedManyWithoutSectionToFieldsInput,
+    type: () => FieldItemCreateNestedManyWithoutSectionToFieldsInput,
   })
   @ValidateNested()
-  @Type(() => FieldCreateNestedManyWithoutSectionToFieldsInput)
+  @Type(() => FieldItemCreateNestedManyWithoutSectionToFieldsInput)
   @IsOptional()
-  @Field(() => FieldCreateNestedManyWithoutSectionToFieldsInput, {
+  @Field(() => FieldItemCreateNestedManyWithoutSectionToFieldsInput, {
     nullable: true,
   })
-  field?: FieldCreateNestedManyWithoutSectionToFieldsInput;
+  field?: FieldItemCreateNestedManyWithoutSectionToFieldsInput;
 
   @ApiProperty({
     required: false,

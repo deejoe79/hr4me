@@ -9,10 +9,9 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType } from "@nestjs/graphql";
+import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsInt, IsOptional, IsDate, IsString } from "class-validator";
-import { Field } from "../../field/base/Field";
 import { Type } from "class-transformer";
 @ObjectType()
 class Company {

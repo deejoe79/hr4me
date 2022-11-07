@@ -10,7 +10,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "nestjs-prisma";
-import { Prisma, SectionToField, Field, Section } from "@prisma/client";
+import { Prisma, SectionToField, FieldItem, Section } from "@prisma/client";
 
 export class SectionToFieldServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -49,8 +49,8 @@ export class SectionToFieldServiceBase {
 
   async findField(
     parentId: string,
-    args: Prisma.FieldFindManyArgs
-  ): Promise<Field[]> {
+    args: Prisma.FieldItemFindManyArgs
+  ): Promise<FieldItem[]> {
     return this.prisma.sectionToField
       .findUnique({
         where: { id: parentId },

@@ -25,8 +25,8 @@ import { DeleteSectionToFieldArgs } from "./DeleteSectionToFieldArgs";
 import { SectionToFieldFindManyArgs } from "./SectionToFieldFindManyArgs";
 import { SectionToFieldFindUniqueArgs } from "./SectionToFieldFindUniqueArgs";
 import { SectionToField } from "./SectionToField";
-import { FieldFindManyArgs } from "../../field/base/FieldFindManyArgs";
-import { Field } from "../../field/base/Field";
+import { FieldItemFindManyArgs } from "../../fieldItem/base/FieldItemFindManyArgs";
+import { FieldItem } from "../../fieldItem/base/FieldItem";
 import { SectionFindManyArgs } from "../../section/base/SectionFindManyArgs";
 import { Section } from "../../section/base/Section";
 import { SectionToFieldService } from "../sectionToField.service";
@@ -151,16 +151,16 @@ export class SectionToFieldResolverBase {
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
-  @graphql.ResolveField(() => [Field])
+  @graphql.ResolveField(() => [FieldItem])
   @nestAccessControl.UseRoles({
-    resource: "Field",
+    resource: "FieldItem",
     action: "read",
     possession: "any",
   })
   async field(
     @graphql.Parent() parent: SectionToField,
-    @graphql.Args() args: FieldFindManyArgs
-  ): Promise<Field[]> {
+    @graphql.Args() args: FieldItemFindManyArgs
+  ): Promise<FieldItem[]> {
     const results = await this.service.findField(parent.id, args);
 
     if (!results) {

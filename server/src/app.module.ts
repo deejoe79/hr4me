@@ -4,7 +4,7 @@ import { MorganInterceptor, MorganModule } from "nest-morgan";
 import { UserModule } from "./user/user.module";
 import { CompanyModule } from "./company/company.module";
 import { SectionModule } from "./section/section.module";
-import { FieldModule } from "./field/field.module";
+import { FieldItemModule } from "./fieldItem/fieldItem.module";
 import { SectionToFieldModule } from "./sectionToField/sectionToField.module";
 import { CvModule } from "./cv/cv.module";
 import { ACLModule } from "./auth/acl.module";
@@ -22,7 +22,7 @@ import { GraphQLModule } from "@nestjs/graphql";
     UserModule,
     CompanyModule,
     SectionModule,
-    FieldModule,
+    FieldItemModule,
     SectionToFieldModule,
     CvModule,
     ACLModule,

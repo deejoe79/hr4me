@@ -9,7 +9,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType } from "@nestjs/graphql";
+import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
   IsDate,
@@ -21,7 +21,6 @@ import {
   IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Field } from "../../field/base/Field";
 import { Cv } from "../../cv/base/Cv";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";

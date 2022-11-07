@@ -9,8 +9,7 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType } from "@nestjs/graphql";
-import { Field } from "../../field/base/Field";
+import { ArgsType, Field } from "@nestjs/graphql";
 import { CvCreateInput } from "./CvCreateInput";
 
 @ArgsType()
