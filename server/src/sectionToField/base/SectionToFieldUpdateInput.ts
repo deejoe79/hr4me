@@ -9,26 +9,25 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType } from "@nestjs/graphql";
+import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { FieldUpdateManyWithoutSectionToFieldsInput } from "./FieldUpdateManyWithoutSectionToFieldsInput";
+import { FieldItemUpdateManyWithoutSectionToFieldsInput } from "./FieldItemUpdateManyWithoutSectionToFieldsInput";
 import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { Field } from "../../field/base/Field";
 import { SectionUpdateManyWithoutSectionToFieldsInput } from "./SectionUpdateManyWithoutSectionToFieldsInput";
 @InputType()
 class SectionToFieldUpdateInput {
   @ApiProperty({
     required: false,
-    type: () => FieldUpdateManyWithoutSectionToFieldsInput,
+    type: () => FieldItemUpdateManyWithoutSectionToFieldsInput,
   })
   @ValidateNested()
-  @Type(() => FieldUpdateManyWithoutSectionToFieldsInput)
+  @Type(() => FieldItemUpdateManyWithoutSectionToFieldsInput)
   @IsOptional()
-  @Field(() => FieldUpdateManyWithoutSectionToFieldsInput, {
+  @Field(() => FieldItemUpdateManyWithoutSectionToFieldsInput, {
     nullable: true,
   })
-  field?: FieldUpdateManyWithoutSectionToFieldsInput;
+  field?: FieldItemUpdateManyWithoutSectionToFieldsInput;
 
   @ApiProperty({
     required: false,

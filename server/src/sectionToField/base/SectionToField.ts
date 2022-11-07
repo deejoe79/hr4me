@@ -9,11 +9,11 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType } from "@nestjs/graphql";
+import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsDate, ValidateNested, IsOptional, IsString } from "class-validator";
 import { Type } from "class-transformer";
-import { Field } from "../../field/base/Field";
+import { FieldItem } from "../../fieldItem/base/FieldItem";
 import { Section } from "../../section/base/Section";
 @ObjectType()
 class SectionToField {
@@ -27,12 +27,12 @@ class SectionToField {
 
   @ApiProperty({
     required: false,
-    type: () => [Field],
+    type: () => [FieldItem],
   })
   @ValidateNested()
-  @Type(() => Field)
+  @Type(() => FieldItem)
   @IsOptional()
-  field?: Array<Field>;
+  field?: Array<FieldItem>;
 
   @ApiProperty({
     required: true,

@@ -9,12 +9,11 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType } from "@nestjs/graphql";
+import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IntFilter } from "../../util/IntFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested, IsEnum } from "class-validator";
-import { Field } from "../../field/base/Field";
 import { CvWhereUniqueInput } from "../../cv/base/CvWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { SectionToFieldListRelationFilter } from "../../sectionToField/base/SectionToFieldListRelationFilter";

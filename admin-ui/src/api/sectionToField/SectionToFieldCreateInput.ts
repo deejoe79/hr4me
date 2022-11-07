@@ -1,7 +1,7 @@
-import { FieldCreateNestedManyWithoutSectionToFieldsInput } from "./FieldCreateNestedManyWithoutSectionToFieldsInput";
+import { FieldItemCreateNestedManyWithoutSectionToFieldsInput } from "./FieldItemCreateNestedManyWithoutSectionToFieldsInput";
 import { SectionCreateNestedManyWithoutSectionToFieldsInput } from "./SectionCreateNestedManyWithoutSectionToFieldsInput";
 
 export type SectionToFieldCreateInput = {
-  field?: FieldCreateNestedManyWithoutSectionToFieldsInput;
+  field?: FieldItemCreateNestedManyWithoutSectionToFieldsInput;
   section?: SectionCreateNestedManyWithoutSectionToFieldsInput;
 };

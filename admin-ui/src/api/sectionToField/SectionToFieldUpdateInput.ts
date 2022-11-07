@@ -1,7 +1,7 @@
-import { FieldUpdateManyWithoutSectionToFieldsInput } from "./FieldUpdateManyWithoutSectionToFieldsInput";
+import { FieldItemUpdateManyWithoutSectionToFieldsInput } from "./FieldItemUpdateManyWithoutSectionToFieldsInput";
 import { SectionUpdateManyWithoutSectionToFieldsInput } from "./SectionUpdateManyWithoutSectionToFieldsInput";
 
 export type SectionToFieldUpdateInput = {
-  field?: FieldUpdateManyWithoutSectionToFieldsInput;
+  field?: FieldItemUpdateManyWithoutSectionToFieldsInput;
   section?: SectionUpdateManyWithoutSectionToFieldsInput;
 };

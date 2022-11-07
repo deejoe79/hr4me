@@ -17,10 +17,10 @@ import { SectionList } from "./section/SectionList";
 import { SectionCreate } from "./section/SectionCreate";
 import { SectionEdit } from "./section/SectionEdit";
 import { SectionShow } from "./section/SectionShow";
-import { FieldList } from "./field/FieldList";
-import { FieldCreate } from "./field/FieldCreate";
-import { FieldEdit } from "./field/FieldEdit";
-import { FieldShow } from "./field/FieldShow";
+import { FieldItemList } from "./fieldItem/FieldItemList";
+import { FieldItemCreate } from "./fieldItem/FieldItemCreate";
+import { FieldItemEdit } from "./fieldItem/FieldItemEdit";
+import { FieldItemShow } from "./fieldItem/FieldItemShow";
 import { SectionToFieldList } from "./sectionToField/SectionToFieldList";
 import { SectionToFieldCreate } from "./sectionToField/SectionToFieldCreate";
 import { SectionToFieldEdit } from "./sectionToField/SectionToFieldEdit";
@@ -77,11 +77,11 @@ const App = (): React.ReactElement => {
           show={SectionShow}
         />
         <Resource
-          name="Field"
-          list={FieldList}
-          edit={FieldEdit}
-          create={FieldCreate}
-          show={FieldShow}
+          name="FieldItem"
+          list={FieldItemList}
+          edit={FieldItemEdit}
+          create={FieldItemCreate}
+          show={FieldItemShow}
         />
         <Resource
           name="SectionToField"

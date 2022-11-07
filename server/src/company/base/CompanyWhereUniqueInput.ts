@@ -9,10 +9,9 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType } from "@nestjs/graphql";
+import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString } from "class-validator";
-import { Field } from "../../field/base/Field";
 @InputType()
 class CompanyWhereUniqueInput {
   @ApiProperty({
