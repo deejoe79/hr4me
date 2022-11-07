@@ -9,14 +9,31 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
+import { InputType } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { CvListRelationFilter } from "../../cv/base/CvListRelationFilter";
+import { ValidateNested, IsOptional, IsEnum } from "class-validator";
 import { Type } from "class-transformer";
-import { IsOptional } from "class-validator";
+import { Field } from "../../field/base/Field";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
+import { DateTimeFilter } from "../../util/DateTimeFilter";
+import { BooleanFilter } from "../../util/BooleanFilter";
+import { EnumUserUserType } from "./EnumUserUserType";
 @InputType()
 class UserWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => CvListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => CvListRelationFilter)
+  @IsOptional()
+  @Field(() => CvListRelationFilter, {
+    nullable: true,
+  })
+  cvs?: CvListRelationFilter;
+
   @ApiProperty({
     required: false,
     type: StringNullableFilter,
@@ -41,6 +58,17 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
+    type: DateTimeFilter,
+  })
+  @Type(() => DateTimeFilter)
+  @IsOptional()
+  @Field(() => DateTimeFilter, {
+    nullable: true,
+  })
+  lastLoginDate?: DateTimeFilter;
+
+  @ApiProperty({
+    required: false,
     type: StringNullableFilter,
   })
   @Type(() => StringNullableFilter)
@@ -52,6 +80,17 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
+    type: BooleanFilter,
+  })
+  @Type(() => BooleanFilter)
+  @IsOptional()
+  @Field(() => BooleanFilter, {
+    nullable: true,
+  })
+  stillAvailable?: BooleanFilter;
+
+  @ApiProperty({
+    required: false,
     type: StringFilter,
   })
   @Type(() => StringFilter)
@@ -60,5 +99,16 @@ class UserWhereInput {
     nullable: true,
   })
   username?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumUserUserType,
+  })
+  @IsEnum(EnumUserUserType)
+  @IsOptional()
+  @Field(() => EnumUserUserType, {
+    nullable: true,
+  })
+  userType?: "JobSeeker" | "Employer";
 }
 export { UserWhereInput };

@@ -9,13 +9,37 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
+import { InputType } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsJSON } from "class-validator";
+import { CvCreateNestedManyWithoutUsersInput } from "./CvCreateNestedManyWithoutUsersInput";
+import {
+  ValidateNested,
+  IsOptional,
+  IsString,
+  IsDate,
+  IsJSON,
+  IsBoolean,
+  IsEnum,
+} from "class-validator";
+import { Type } from "class-transformer";
+import { Field } from "../../field/base/Field";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
+import { EnumUserUserType } from "./EnumUserUserType";
 @InputType()
 class UserCreateInput {
+  @ApiProperty({
+    required: false,
+    type: () => CvCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => CvCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => CvCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  cvs?: CvCreateNestedManyWithoutUsersInput;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -26,6 +50,14 @@ class UserCreateInput {
     nullable: true,
   })
   firstName?: string | null;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @Field(() => Date)
+  lastLoginDate!: Date;
 
   @ApiProperty({
     required: false,
@@ -55,10 +87,26 @@ class UserCreateInput {
 
   @ApiProperty({
     required: true,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @Field(() => Boolean)
+  stillAvailable!: boolean;
+
+  @ApiProperty({
+    required: true,
     type: String,
   })
   @IsString()
   @Field(() => String)
   username!: string;
+
+  @ApiProperty({
+    required: true,
+    enum: EnumUserUserType,
+  })
+  @IsEnum(EnumUserUserType)
+  @Field(() => EnumUserUserType)
+  userType!: "JobSeeker" | "Employer";
 }
 export { UserCreateInput };

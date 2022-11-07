@@ -27,6 +27,9 @@ import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserUpdateInput } from "./UserUpdateInput";
 import { User } from "./User";
+import { CvFindManyArgs } from "../../cv/base/CvFindManyArgs";
+import { Cv } from "../../cv/base/Cv";
+import { CvWhereUniqueInput } from "../../cv/base/CvWhereUniqueInput";
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class UserControllerBase {
@@ -51,10 +54,13 @@ export class UserControllerBase {
         createdAt: true,
         firstName: true,
         id: true,
+        lastLoginDate: true,
         lastName: true,
         roles: true,
+        stillAvailable: true,
         updatedAt: true,
         username: true,
+        userType: true,
       },
     });
   }
@@ -77,10 +83,13 @@ export class UserControllerBase {
         createdAt: true,
         firstName: true,
         id: true,
+        lastLoginDate: true,
         lastName: true,
         roles: true,
+        stillAvailable: true,
         updatedAt: true,
         username: true,
+        userType: true,
       },
     });
   }
@@ -104,10 +113,13 @@ export class UserControllerBase {
         createdAt: true,
         firstName: true,
         id: true,
+        lastLoginDate: true,
         lastName: true,
         roles: true,
+        stillAvailable: true,
         updatedAt: true,
         username: true,
+        userType: true,
       },
     });
     if (result === null) {
@@ -140,10 +152,13 @@ export class UserControllerBase {
           createdAt: true,
           firstName: true,
           id: true,
+          lastLoginDate: true,
           lastName: true,
           roles: true,
+          stillAvailable: true,
           updatedAt: true,
           username: true,
+          userType: true,
         },
       });
     } catch (error) {
@@ -175,10 +190,13 @@ export class UserControllerBase {
           createdAt: true,
           firstName: true,
           id: true,
+          lastLoginDate: true,
           lastName: true,
           roles: true,
+          stillAvailable: true,
           updatedAt: true,
           username: true,
+          userType: true,
         },
       });
     } catch (error) {
@@ -189,5 +207,106 @@ export class UserControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @nestAccessControl.UseRoles({
+    resource: "Cv",
+    action: "read",
+    possession: "any",
+  })
+  @common.Get("/:id/cvs")
+  @ApiNestedQuery(CvFindManyArgs)
+  async findManyCvs(
+    @common.Req() request: Request,
+    @common.Param() params: UserWhereUniqueInput
+  ): Promise<Cv[]> {
+    const query = plainToClass(CvFindManyArgs, request.query);
+    const results = await this.service.findCvs(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        id: true,
+        updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  @common.Post("/:id/cvs")
+  async connectCvs(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: CvWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      cvs: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  @common.Patch("/:id/cvs")
+  async updateCvs(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: CvWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      cvs: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  @common.Delete("/:id/cvs")
+  async disconnectCvs(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: CvWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      cvs: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

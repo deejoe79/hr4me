@@ -9,12 +9,23 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ObjectType, Field } from "@nestjs/graphql";
+import { ObjectType } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString, IsOptional, IsJSON } from "class-validator";
+import {
+  IsDate,
+  ValidateNested,
+  IsOptional,
+  IsString,
+  IsJSON,
+  IsBoolean,
+  IsEnum,
+} from "class-validator";
 import { Type } from "class-transformer";
+import { Field } from "../../field/base/Field";
+import { Cv } from "../../cv/base/Cv";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
+import { EnumUserUserType } from "./EnumUserUserType";
 @ObjectType()
 class User {
   @ApiProperty({
@@ -24,6 +35,15 @@ class User {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Cv],
+  })
+  @ValidateNested()
+  @Type(() => Cv)
+  @IsOptional()
+  cvs?: Array<Cv>;
 
   @ApiProperty({
     required: false,
@@ -45,6 +65,14 @@ class User {
   id!: string;
 
   @ApiProperty({
+    required: true,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @Field(() => Date)
+  lastLoginDate!: Date;
+
+  @ApiProperty({
     required: false,
     type: String,
   })
@@ -64,6 +92,14 @@ class User {
 
   @ApiProperty({
     required: true,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @Field(() => Boolean)
+  stillAvailable!: boolean;
+
+  @ApiProperty({
+    required: true,
   })
   @IsDate()
   @Type(() => Date)
@@ -77,5 +113,15 @@ class User {
   @IsString()
   @Field(() => String)
   username!: string;
+
+  @ApiProperty({
+    required: true,
+    enum: EnumUserUserType,
+  })
+  @IsEnum(EnumUserUserType)
+  @Field(() => EnumUserUserType, {
+    nullable: true,
+  })
+  userType?: "JobSeeker" | "Employer";
 }
 export { User };
