@@ -22,8 +22,10 @@ const CREATE_INPUT = {
   createdAt: new Date(),
   firstName: "exampleFirstName",
   id: "exampleId",
+  lastLoginDate: new Date(),
   lastName: "exampleLastName",
   password: "examplePassword",
+  stillAvailable: "true",
   updatedAt: new Date(),
   username: "exampleUsername",
 };
@@ -31,8 +33,10 @@ const CREATE_RESULT = {
   createdAt: new Date(),
   firstName: "exampleFirstName",
   id: "exampleId",
+  lastLoginDate: new Date(),
   lastName: "exampleLastName",
   password: "examplePassword",
+  stillAvailable: "true",
   updatedAt: new Date(),
   username: "exampleUsername",
 };
@@ -41,8 +45,10 @@ const FIND_MANY_RESULT = [
     createdAt: new Date(),
     firstName: "exampleFirstName",
     id: "exampleId",
+    lastLoginDate: new Date(),
     lastName: "exampleLastName",
     password: "examplePassword",
+    stillAvailable: "true",
     updatedAt: new Date(),
     username: "exampleUsername",
   },
@@ -51,8 +57,10 @@ const FIND_ONE_RESULT = {
   createdAt: new Date(),
   firstName: "exampleFirstName",
   id: "exampleId",
+  lastLoginDate: new Date(),
   lastName: "exampleLastName",
   password: "examplePassword",
+  stillAvailable: "true",
   updatedAt: new Date(),
   username: "exampleUsername",
 };
@@ -140,6 +148,7 @@ describe("User", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
+        lastLoginDate: CREATE_RESULT.lastLoginDate.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
   });
@@ -152,6 +161,7 @@ describe("User", () => {
         {
           ...FIND_MANY_RESULT[0],
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
+          lastLoginDate: FIND_MANY_RESULT[0].lastLoginDate.toISOString(),
           updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
       ]);
@@ -175,6 +185,7 @@ describe("User", () => {
       .expect({
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
+        lastLoginDate: FIND_ONE_RESULT.lastLoginDate.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
   });

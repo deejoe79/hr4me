@@ -9,13 +9,37 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
+import { InputType } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsJSON } from "class-validator";
+import { CvUpdateManyWithoutUsersInput } from "./CvUpdateManyWithoutUsersInput";
+import {
+  ValidateNested,
+  IsOptional,
+  IsString,
+  IsDate,
+  IsJSON,
+  IsBoolean,
+  IsEnum,
+} from "class-validator";
+import { Type } from "class-transformer";
+import { Field } from "../../field/base/Field";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
+import { EnumUserUserType } from "./EnumUserUserType";
 @InputType()
 class UserUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: () => CvUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => CvUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => CvUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  cvs?: CvUpdateManyWithoutUsersInput;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -26,6 +50,17 @@ class UserUpdateInput {
     nullable: true,
   })
   firstName?: string | null;
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  lastLoginDate?: Date;
 
   @ApiProperty({
     required: false,
@@ -61,6 +96,17 @@ class UserUpdateInput {
 
   @ApiProperty({
     required: false,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @IsOptional()
+  @Field(() => Boolean, {
+    nullable: true,
+  })
+  stillAvailable?: boolean;
+
+  @ApiProperty({
+    required: false,
     type: String,
   })
   @IsString()
@@ -69,5 +115,16 @@ class UserUpdateInput {
     nullable: true,
   })
   username?: string;
+
+  @ApiProperty({
+    required: false,
+    enum: EnumUserUserType,
+  })
+  @IsEnum(EnumUserUserType)
+  @IsOptional()
+  @Field(() => EnumUserUserType, {
+    nullable: true,
+  })
+  userType?: "JobSeeker" | "Employer";
 }
 export { UserUpdateInput };

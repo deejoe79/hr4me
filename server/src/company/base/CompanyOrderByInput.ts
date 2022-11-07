@@ -9,8 +9,9 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
+import { InputType } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { Field } from "../../field/base/Field";
 import { SortOrder } from "../../util/SortOrder";
 
 @InputType({

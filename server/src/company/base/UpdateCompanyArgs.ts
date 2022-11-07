@@ -9,7 +9,8 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from "@nestjs/graphql";
+import { ArgsType } from "@nestjs/graphql";
+import { Field } from "../../field/base/Field";
 import { CompanyWhereUniqueInput } from "./CompanyWhereUniqueInput";
 import { CompanyUpdateInput } from "./CompanyUpdateInput";
 

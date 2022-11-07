@@ -8,14 +8,18 @@ generator client {
 }
 
 model User {
-  createdAt DateTime @default(now())
-  firstName String?
-  id        String   @id @default(cuid())
-  lastName  String?
-  password  String
-  roles     Json
-  updatedAt DateTime @updatedAt
-  username  String   @unique
+  createdAt      DateTime         @default(now())
+  cvs            Cv[]
+  firstName      String?
+  id             String           @id @default(cuid())
+  lastLoginDate  DateTime
+  lastName       String?
+  password       String
+  roles          Json
+  stillAvailable Boolean
+  updatedAt      DateTime         @updatedAt
+  username       String           @unique
+  userType       EnumUserUserType
 }
 
 model Company {
@@ -23,4 +27,69 @@ model Company {
   createdAt           DateTime @default(now())
   id                  String   @id @default(cuid())
   updatedAt           DateTime @updatedAt
+}
+
+model Section {
+  columnCount     Int
+  createdAt       DateTime                @default(now())
+  cv              Cv?                     @relation(fields: [cvId], references: [id])
+  cvId            String?
+  id              String                  @id @default(cuid())
+  sectionToFields SectionToField[]
+  sectionType     EnumSectionSectionType?
+  title           String?
+  updatedAt       DateTime                @updatedAt
+}
+
+model Field {
+  createdAt       DateTime                 @default(now())
+  fieldType       EnumFieldFieldType
+  fieldValue      String?
+  id              String                   @id @default(cuid())
+  sectionToFields SectionToField[]
+  title           String
+  updatedAt       DateTime                 @updatedAt
+  validationType  EnumFieldValidationType?
+}
+
+model SectionToField {
+  createdAt DateTime  @default(now())
+  field     Field[]
+  id        String    @id @default(cuid())
+  section   Section[]
+  updatedAt DateTime  @updatedAt
+}
+
+model Cv {
+  createdAt DateTime  @default(now())
+  id        String    @id @default(cuid())
+  sections  Section[]
+  updatedAt DateTime  @updatedAt
+  user      User?     @relation(fields: [userId], references: [id])
+  userId    String?
+}
+
+enum EnumUserUserType {
+  JobSeeker
+  Employer
+}
+
+enum EnumSectionSectionType {
+  Simple
+  TwoFields
+  ThreeFields
+  FourFields
+  FiveFields
+}
+
+enum EnumFieldFieldType {
+  SingleLineText
+  Number
+  MultiLineText
+}
+
+enum EnumFieldValidationType {
+  Email
+  Web
+  Number
 }

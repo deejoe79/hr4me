@@ -9,9 +9,10 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { ArgsType, Field } from "@nestjs/graphql";
+import { ArgsType } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { CompanyWhereInput } from "./CompanyWhereInput";
+import { Field } from "../../field/base/Field";
 import { Type } from "class-transformer";
 import { CompanyOrderByInput } from "./CompanyOrderByInput";
 

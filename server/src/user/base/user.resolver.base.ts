@@ -25,6 +25,8 @@ import { DeleteUserArgs } from "./DeleteUserArgs";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
+import { CvFindManyArgs } from "../../cv/base/CvFindManyArgs";
+import { Cv } from "../../cv/base/Cv";
 import { UserService } from "../user.service";
 
 @graphql.Resolver(() => User)
@@ -134,5 +136,25 @@ export class UserResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Cv])
+  @nestAccessControl.UseRoles({
+    resource: "Cv",
+    action: "read",
+    possession: "any",
+  })
+  async cvs(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: CvFindManyArgs
+  ): Promise<Cv[]> {
+    const results = await this.service.findCvs(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
   }
 }
